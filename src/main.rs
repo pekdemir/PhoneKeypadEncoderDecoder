@@ -11,6 +11,8 @@
 //             return Err(format!("Error decoding, invalid number {}", index));
 //         }
 
+mod tests;
+
 //         if prev_index == 0 || prev_index == index {
 //             str_index += 1;
 //             prev_index = index;
@@ -27,13 +29,15 @@
 //     } 
 //     return Ok(output);
 // }
+mod phone_key_encoder_decoder {
+
 #[derive(Debug)]
 struct Button {
     no: usize,
     repeat: usize
 }
 
-fn encode(plain_text: String) -> Result<String, String> {
+pub fn encode(plain_text: String) -> Result<String, String> {
     let mut output = String::new();
 
     let buttons = match set_button(plain_text) {
@@ -57,7 +61,7 @@ fn encode(plain_text: String) -> Result<String, String> {
 
 }
 
-fn decode(encoded_text: String) -> Result<String, String> {
+pub fn decode(encoded_text: String) -> Result<String, String> {
     let numbers = [" ", "", "abc", "def", "ghi", "jkl", "mno", "pqrs", "tuv", "wxyz"];
     let mut output = String::new();
     
@@ -96,7 +100,13 @@ fn get_button(s: String) -> Result<Vec<Button>, String> {
             continue;
         }
 
-        let index = chr.to_digit(10).unwrap();
+        let index = match chr.to_digit(10) {
+            Some(i) => i,
+            None => { 
+                return Err(format!("Error decoding, invalid character {}", chr));
+            }
+        };
+
         if (index < 2 && index != 0) || index > 9 {
             return Err(format!("Error decoding, invalid number {}", index));
         }
@@ -136,9 +146,11 @@ fn set_button(s: String) -> Result<Vec<Button>, String> {
 
     return Ok(buttons);
 }
+}
 
 fn main() {
 
+    use phone_key_encoder_decoder;
     //let encoded = String::from("44255266073355");
 
     // match decode(encoded) {
@@ -146,20 +158,17 @@ fn main() {
     //     Ok(s) => println!("{}", s),
     // };
 
-    let plaintext = String::from("hello world from rust");
+    let plaintext = String::from("rust is awesome");
     println!("Plain Text: {}", plaintext);
 
-    match encode(plaintext) {
+    match phone_key_encoder_decoder::encode(plaintext) {
         Err(x) => println!("{}", x),
         Ok(s) => {
             println!("Encoded: {}", s);
-            match decode(s) {
+            match phone_key_encoder_decoder::decode(s) {
                 Err(x) => println!("{}", x),
                 Ok(s) => println!("Decoded: {}", s)
             }
         }
     };
-
-
-
 }
