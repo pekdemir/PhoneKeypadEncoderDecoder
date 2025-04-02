@@ -1,34 +1,5 @@
 
-// fn decode(s: String) -> Result<String, String> {
-//     let numbers = ["", "", "abc", "def", "ghi", "jkl", "mno", "pqrs", "tuv", "wxyz"];
-//     let mut prev_index = 0;
-//     let mut output = String::new();
-//     let mut str_index: usize = 0;
-    
-//     for c in s.chars() {
-//         let index: usize = c.to_digit(10).unwrap() as usize;
-//         if index < 2 || index > 9 {
-//             return Err(format!("Error decoding, invalid number {}", index));
-//         }
-
 mod tests;
-
-//         if prev_index == 0 || prev_index == index {
-//             str_index += 1;
-//             prev_index = index;
-//         }else{
-//             let str_group = numbers[prev_index];
-//             let chr = &str_group[str_index..str_index+1];
-//             str_index = 0;
-//             prev_index = index;
-//             output += chr;
-//         }
-        
-        
-//         //println!("{}", index);
-//     } 
-//     return Ok(output);
-// }
 mod phone_key_encoder_decoder {
 
 #[derive(Debug)]
@@ -151,12 +122,6 @@ fn set_button(s: String) -> Result<Vec<Button>, String> {
 fn main() {
 
     use phone_key_encoder_decoder;
-    //let encoded = String::from("44255266073355");
-
-    // match decode(encoded) {
-    //     Err(x) => println!("{}", x),
-    //     Ok(s) => println!("{}", s),
-    // };
 
     let plaintext = String::from("rust is awesome");
     println!("Plain Text: {}", plaintext);
