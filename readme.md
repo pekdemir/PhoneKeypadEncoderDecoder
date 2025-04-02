@@ -9,7 +9,7 @@ Encodes a text to phone key presses, decodes key presses string to actual text.
 ```
 ## Usage
 - Encoding:
-    $ PhoneKeypadEncoderDecoder encode <plain_text>
+    $ PhoneKeypadEncoderDecoder encode "<plain_text>"
 
 - Decoding:
     $ PhoneKeypadEncoderDecoder decode <encoded_text>

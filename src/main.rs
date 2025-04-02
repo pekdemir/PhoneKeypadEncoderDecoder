@@ -126,19 +126,49 @@ fn set_button(s: String) -> Result<Vec<Button>, String> {
 
 fn main() {
 
+    use std::env;
     use phone_key_encoder_decoder;
 
-    let plaintext = String::from("rust is awesome");
-    println!("Plain Text: {}", plaintext);
 
-    match phone_key_encoder_decoder::encode(plaintext) {
-        Err(x) => println!("{}", x),
-        Ok(s) => {
-            println!("Encoded: {}", s);
-            match phone_key_encoder_decoder::decode(s) {
+    let args: Vec<String> = env::args().collect();
+    if args.len() < 3 {
+        panic!("Not enough arguments!\nUsage:\n    $PhoneKeypadEncoderDecoder encode|decode \"text\"");
+    }
+
+    let cmd = &args[1];
+    let text = &args[2];
+
+    match cmd.as_str() {
+        "encode" => {
+            match phone_key_encoder_decoder::encode(text.to_string()) {
                 Err(x) => println!("{}", x),
-                Ok(s) => println!("Decoded: {}", s)
+                Ok(s) => { println!("{}", s);}
+            }
+        },
+
+        "decode" => {
+            match phone_key_encoder_decoder::decode(text.to_string()) {
+                Err(x) => println!("{}", x),
+                Ok(s) => { println!("{}", s);}
             }
         }
-    };
+        _ => { panic!("Wrong command!\nUsage:\n    $PhoneKeypadEncoderDecoder encode|decode \"text\""); }
+    }
+
+    // println!("command:{cmd}");
+    // println!("text: {text}");
+    
+    // let plaintext = String::from("rust is awesome");
+    // println!("Plain Text: {}", plaintext);
+
+    // match phone_key_encoder_decoder::encode(plaintext) {
+    //     Err(x) => println!("{}", x),
+    //     Ok(s) => {
+    //         println!("Encoded: {}", s);
+    //         match phone_key_encoder_decoder::decode(s) {
+    //             Err(x) => println!("{}", x),
+    //             Ok(s) => println!("Decoded: {}", s)
+    //         }
+    //     }
+    // };
 }
