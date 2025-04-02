@@ -1,4 +1,5 @@
 # Phone Keypad Encoder Decoder
+
 Encodes a text to phone key presses, decodes key presses string to actual text.
 
 ```
@@ -8,11 +9,19 @@ Encodes a text to phone key presses, decodes key presses string to actual text.
        0 <spc>
 ```
 ## Usage
+
 - Encoding:
-    `$ PhoneKeypadEncoderDecoder encode "<plain_text>"`
+    ```shell
+    $ PhoneKeypadEncoderDecoder encode "<plain_text>"
+    ```
 
 - Decoding:
-    `$ PhoneKeypadEncoderDecoder decode <encoded_text>`
+    ```shell
+    $ PhoneKeypadEncoderDecoder decode <encoded_text>
+    ```
 
 ### Self test
-    `$ PhoneKeypadEncoderDecoder decode \`PhoneKeypadEncoderDecoder encode "rust is awesome"\``
+
+    ```shell
+    $ PhoneKeypadEncoderDecoder decode `PhoneKeypadEncoderDecoder encode "rust is awesome"`
+    ```
